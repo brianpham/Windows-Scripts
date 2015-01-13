@@ -1,0 +1,1 @@
+Set-Mailbox pgs.user1.ca -EmailAddresses @{Add='smtp:pgs.user1.ca@polycomcsn.com'}
