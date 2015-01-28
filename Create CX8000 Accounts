@@ -1,0 +1,16 @@
+Exchange cmdlets
+----------------
+
+New-Mailbox –Name "Chicago CX8000" –Alias "chicx8000" –UserPrincipalName "chicx8000@polycomcsn.com" –SamAccountName "chicx8000" -DisplayName "Chicago CX8000 (CSN)" –Room -RoomMailboxPassword (ConvertTo-SecureString -String “polycom!23” -AsPlainText -Force) -OrganizationalUnit "ou=Resources,ou=CSN,dc=polycomcsn,dc=com" -EnableRoomMailboxAccount $true
+
+Set-CalendarProcessing -Identity "chicx8000" -AutomateProcessing AutoAccept -AddOrganizerToSubject $false -RemovePrivateProperty $false -DeleteComments $false -DeleteSubject $false –AddAdditionalResponse $TRUE –AdditionalResponse “Your meeting is now scheduled and if it was enabled as a Lync Online Meeting then the CX8000 will provide a seamless click-to-join experience from the conference room.”
+
+Set-Mailbox -Identity "chicx8000" -MailTip "This room is equipped with Lync Meeting Room (LRS), please make it a Lync Meeting to take advantage of the enhanced meeting experience from LRS"
+
+
+Lync Cmdlets
+------------	
+
+Enable-CsMeetingRoom -Identity "chicx8000" -SipAddress "sip:chicx8000@polycomcsn.com" -domaincontroller "nadc1.polycomcsn.com" -RegistrarPool "nalyncpool.polycomcsn.com"
+
+Set-CsMeetingRoom -Identity "chicx8000" -domaincontroller "nadc1.polycomcsn.com" -EnterpriseVoiceEnabled $true
